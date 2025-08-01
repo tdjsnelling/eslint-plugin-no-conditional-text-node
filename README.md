@@ -1,6 +1,6 @@
 # eslint-plugin-no-conditional-text-node
 
-An ESLint plugin to catch React text node conditionals that may lead to browser-translation-based errors, as outlined in [this issue](https://github.com/facebook/react/issues/11538#issuecomment-390386520).
+An ESLint 8 plugin to catch React text node conditionals that may lead to browser-translation-based errors, as outlined in [this issue](https://github.com/facebook/react/issues/11538#issuecomment-390386520).
 
 This plugin will error on the following cases:
 
@@ -16,4 +16,15 @@ This plugin will error on the following cases:
   {condition && <span>Something</span>}
   Welcome
 </div>
+```
+
+## Usage
+
+```js
+module.exports = {
+  plugins: ['no-conditional-text-node'],
+  rules: {
+    'no-conditional-text-node/no-conditional-text-node': 'error'
+  }
+}
 ```
