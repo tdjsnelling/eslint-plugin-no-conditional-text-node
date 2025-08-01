@@ -1,0 +1,39 @@
+{
+  "name": "eslint-plugin-no-conditional-text-node",
+  "description": "An ESLint plugin to catch React text node conditionals that may lead to browser-translation-based errors.",
+  "version": "1.0.1",
+  "main": "src/index.js",
+  "license": "MIT",
+  "author": {
+    "name": "Tom Snelling",
+    "url": "https://tdjs.dev"
+  },
+  "homepage": "https://github.com/tdjsnelling/eslint-plugin-no-conditional-text-node",
+  "files": [
+    "src/index.js",
+    "src/lib/rules/no-conditional-text-node.js"
+  ],
+  "scripts": {
+    "test": "node ./src/lib/rules/no-conditional-text-node.test.js"
+  },
+  "peerDependencies": {
+    "eslint": ">=8.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-eslint-plugin": "^6.5.0",
+    "eslint-plugin-prettier": "^5.5.3",
+    "prettier": "^3.6.2"
+  },
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin",
+    "react",
+    "jsx",
+    "chrome",
+    "translate",
+    "translation"
+  ]
+}
