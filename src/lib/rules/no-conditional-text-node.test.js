@@ -22,13 +22,22 @@ ruleTester.run("no-conditional-text-node", noConditionalTextNode, {
         <span>Hello</span>
       </div>
     `,
-    // Plain text without any conditional
+    // Conditional, but no text nodes
     `
       <div>
         {condition && <span>Welcome</span>}
         <span>Hello</span>
       </div>
     `,
+    // Literal (null, 0, true, etc.), but not string literal
+    `
+      <div>
+        {condition ? (
+          <Component />
+        ) : null}
+        <span>Hello</span>
+      </div>
+      `,
   ],
 
   invalid: [

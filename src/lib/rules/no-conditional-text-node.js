@@ -37,16 +37,23 @@ module.exports = {
     }
 
     /**
+     * Is this node a string literal?
+     */
+    function isStringLiteral(node) {
+      return node && node.type === "Literal" && typeof node.value === "string";
+    }
+
+    /**
      * Does this expression potentially render a **text** node?
      */
     function yieldsText(expr) {
       if (expr.type === "LogicalExpression" && expr.operator === "&&") {
         const right = expr.right;
-        return right.type === "Literal";
+        return isStringLiteral(right);
       }
       if (expr.type === "ConditionalExpression") {
         const { consequent, alternate } = expr;
-        return [consequent, alternate].some((node) => node.type === "Literal");
+        return [consequent, alternate].some((node) => isStringLiteral(node));
       }
       return false;
     }
@@ -60,13 +67,16 @@ module.exports = {
 
       // keep track of all meaningful text-node indices so we can detect case 2 below
       const textIndices = kids
-        .map((c, i) =>
-          (c.type === "JSXText" && c.value.trim()) ||
-          (c.type === "JSXExpressionContainer" &&
-            c.expression.type === "Literal")
-            ? i
-            : -1,
-        )
+        .map((c, i) => {
+          if (c.type === "JSXText" && c.value.trim()) return i;
+          if (
+            c.type === "JSXExpressionContainer" &&
+            isStringLiteral(c.expression)
+          ) {
+            return i;
+          }
+          return -1;
+        })
         .filter((i) => i !== -1);
 
       // more than one child: look for conditional-like expression containers
